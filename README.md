@@ -1,7 +1,18 @@
 A logstash filter to parse C# stack traces and exception messages.
 
-Configuration
-=============
+Installation
+============
+As this plugin has been shared on [RubyGems](https://rubygems.org) with the
+name [logstash-filter-csharp](https://rubygems.org/gems/logstash-filter-csharp)
+you can install it using the following command from your Logstash installation
+path:
+
+```sh
+bin/logstash-plugin install logstash-filter-csharp
+```
+
+Usage
+=====
 
 Here is an example configuration that reads fields from a JSON-formatted log
 and expects stack traces to be in the field `stackTrace` and exceptions to be
