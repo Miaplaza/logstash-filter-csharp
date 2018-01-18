@@ -17,6 +17,10 @@ class LogStash::Filters::CSharp < LogStash::Filters::Base
   config :stackframe_path_prefix, :validate => :string
 
   def parse_stacktrace(stacktrace)
+    if stacktrace.nil?
+        return { "frames" => [] }
+    end
+    
     frames = []
     for frame in stacktrace.split(@stackframe_separator)
         begin
