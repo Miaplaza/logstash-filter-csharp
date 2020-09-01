@@ -4,6 +4,15 @@ logstash-filter-csharp Change Log
 
 .. current developments
 
+v0.2.1
+====================
+
+**Changed:**
+
+* typo in rever script
+
+
+
 v0.2.0
 ====================
 
