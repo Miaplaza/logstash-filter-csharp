@@ -46,7 +46,7 @@ $ACTIVITIES = [
 ]
 
 $VERSION_BUMP_PATTERNS = [
-    ('logstash-filter-csharp.gemspec', r's.version = ', r"  s.version = '$VERSION'"),
+    ('logstash-filter-csharp.gemspec', r's.version = ', r"s.version = '$VERSION'"),
 ]
 
 $CHANGELOG_FILENAME = 'CHANGELOG.md'
