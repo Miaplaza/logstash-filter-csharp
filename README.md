@@ -56,14 +56,19 @@ Running Tests
 The tests live in `spec/`. To run them, do something like
 
 ```
-bundle install
-bundle exec rspec
+export GEM_HOME=`mktemp -d`
+jruby -S gem install bundler
+jruby -S bundle install
+jruby -S bundle exec rspec
 ```
 
-If this does not work, there might be a problem with your jruby setup. You
-might want to get RVM and run something like this first
+Releasing a new Version
+=======================
+
+We use [rever](https://github.com/regro/rever). To create a new release make
+sure you are on the master branch, identical to origin/master without pending
+changes and run
+
 ```
-rvm install jruby
-rvm use jruby
-gem install bundler
+rever 0.0.0
 ```
