@@ -9,42 +9,45 @@ describe LogStash::Filters::CSharp do
           type => "stacktrace"
           source => [stacktrace]
           target => [stacktrace]
-          stackframe_path_prefix => ".*\\\\(?=prod\\\\)"
+          stackframe_path_prefix => ".*\\/(website\\/)"
         }
       }
     CONFIG
 
     sample("stacktrace" =>
-' at MiaPlaza.Logger.LogEntry..ctor(Level level, Exception exception, String message) in D:\build\src\previous1199\prod\core\Logger\LogEntry.cs:line 29
-  at MiaPlaza.LO.LongtimeJobScheduler.run(Job job) in D:\build\src\previous1199\prod\wwwroot\LO\LongtimeJobScheduler.cs:line 263
-  at MiaPlaza.LO.LongtimeJobScheduler.executeNextJob() in D:\build\src\previous1199\prod\wwwroot\LO\LongtimeJobScheduler.cs:line 231
-  at MiaPlaza.LO.LongtimeJobScheduler.<>c__DisplayClass24_0.<initializePeriodicJobScheduling>b__0(Object source, ElapsedEventArgs e) in D:\build\src\previous1199\prod\wwwroot\LO\LongtimeJobScheduler.cs:line 195
+' at MiaPlaza.Logger.LogEntry..ctor(Level level, Exception exception, String message) in /builds/miaplaza/website/modules/logger/Logger/LogEntry.cs:line 29
+  at MiaPlaza.Logger.Log.WriteError(Exception e, String message) in /builds/miaplaza/website/modules/logger/Logger/Log.cs:line 54
+  at MiaPlaza.LO.Reminder.<>c__DisplayClass27_0.<CheckToBeDeletedAccounts>b__0() in /builds/miaplaza/website/wwwroot/LO/Reminder.cs:line 676
+  at MiaPlaza.Module.Member.AuthenticationMethod.ThreadAuthenticationMethod.SubstituteUserDo(Member member, Action action) in /builds/miaplaza/website/wwwroot/Module/Member/AuthenticationMethod/ThreadAuthenticationMethod.cs:line 35
+  at MiaPlaza.LO.Reminder.CheckAll() in /builds/miaplaza/website/wwwroot/LO/Reminder.cs:line 96
   at System.Timers.Timer.MyTimerCallback(Object state)
-  at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
-  at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
-  at System.Threading.TimerQueueTimer.CallCallback()
-  at System.Threading.TimerQueueTimer.Fire()
+  at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+  at System.Threading.TimerQueueTimer.CallCallback(Boolean isThreadPool)
+  at System.Threading.TimerQueueTimer.Fire(Boolean isThreadPool)
   at System.Threading.TimerQueue.FireNextTimers()') do
       expect(subject.get("stacktrace")).to eq({ "frames" =>
-       [{"abs_path"=>'D:\build\src\previous1199\prod\core\Logger\LogEntry.cs',
-         "filename"=>'prod\core\Logger\LogEntry.cs',
+       [{"path"=>'/builds/miaplaza/website/modules/logger/Logger/LogEntry.cs',
+         "filename"=>'modules/logger/Logger/LogEntry.cs',
          "lineno"=>"29",
          "function"=>"MiaPlaza.Logger.LogEntry..ctor"},
-        {"abs_path"=> 'D:\build\src\previous1199\prod\wwwroot\LO\LongtimeJobScheduler.cs',
-         "filename"=> 'prod\wwwroot\LO\LongtimeJobScheduler.cs',
-         "lineno"=>"263",
-         "function"=>"MiaPlaza.LO.LongtimeJobScheduler.run"},
-        {"abs_path"=> 'D:\build\src\previous1199\prod\wwwroot\LO\LongtimeJobScheduler.cs',
-         "filename"=> 'prod\wwwroot\LO\LongtimeJobScheduler.cs',
-         "lineno"=>"231",
-         "function"=>"MiaPlaza.LO.LongtimeJobScheduler.executeNextJob"},
-        {"abs_path"=> 'D:\build\src\previous1199\prod\wwwroot\LO\LongtimeJobScheduler.cs',
-         "filename"=> 'prod\wwwroot\LO\LongtimeJobScheduler.cs',
-         "lineno"=>"195",
-         "function"=> "MiaPlaza.LO.LongtimeJobScheduler.<>c__DisplayClass24_0.<initializePeriodicJobScheduling>b__0"},
+        {"path"=> '/builds/miaplaza/website/modules/logger/Logger/Log.cs',
+         "filename"=> 'modules/logger/Logger/Log.cs',
+         "lineno"=>"54",
+         "function"=>"MiaPlaza.Logger.Log.WriteError"},
+        {"path"=> '/builds/miaplaza/website/wwwroot/LO/Reminder.cs',
+         "filename"=> 'wwwroot/LO/Reminder.cs',
+         "lineno"=>"676",
+         "function"=>"MiaPlaza.LO.Reminder.<>c__DisplayClass27_0.<CheckToBeDeletedAccounts>b__0"},
+        {"path"=> '/builds/miaplaza/website/wwwroot/Module/Member/AuthenticationMethod/ThreadAuthenticationMethod.cs',
+         "filename"=> 'wwwroot/Module/Member/AuthenticationMethod/ThreadAuthenticationMethod.cs',
+         "lineno"=>"35",
+         "function"=> "MiaPlaza.Module.Member.AuthenticationMethod.ThreadAuthenticationMethod.SubstituteUserDo"},
+        {"path"=> '/builds/miaplaza/website/wwwroot/LO/Reminder.cs',
+         "filename"=> 'wwwroot/LO/Reminder.cs',
+         "lineno"=>"96",
+         "function"=> "MiaPlaza.LO.Reminder.CheckAll"},
         {"function"=>"System.Timers.Timer.MyTimerCallback"},
         {"function"=>"System.Threading.ExecutionContext.RunInternal"},
-        {"function"=>"System.Threading.ExecutionContext.Run"},
         {"function"=>"System.Threading.TimerQueueTimer.CallCallback"},
         {"function"=>"System.Threading.TimerQueueTimer.Fire"},
         {"function"=>"System.Threading.TimerQueue.FireNextTimers"}]})
