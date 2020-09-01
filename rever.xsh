@@ -16,6 +16,7 @@ class Gem(Activity):
 
     def __call__(self):
         gem build logstash-filter-csharp.gemspec
+        return True
 
 
 class RubyGems(Activity):
@@ -26,7 +27,8 @@ class RubyGems(Activity):
         self.requires = {"commands": {"gem": "gem"}}
 
     def __call__(self):
-        gem push logstah-filter-csharp-@(VERSION).gem
+        gem push logstash-filter-csharp-$VERSION.gem
+        return True
 
 
 $DAG['gem'] = Gem()
