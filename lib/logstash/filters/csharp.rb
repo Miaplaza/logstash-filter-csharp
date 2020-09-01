@@ -27,7 +27,7 @@ class LogStash::Filters::CSharp < LogStash::Filters::Base
             match = @stackframe.match(frame)
             if match
                 parsed = {
-                    :abs_path => match[3],
+                    :path => match[3],
                     :function => match[1],
                     :lineno => match[4]
                 }
@@ -38,8 +38,8 @@ class LogStash::Filters::CSharp < LogStash::Filters::Base
                 }
             end
 
-            if parsed[:abs_path] and @stackframe_path_prefix
-                parsed[:filename] = parsed[:abs_path].gsub(@stackframe_path_prefix, '')
+            if parsed[:path] and @stackframe_path_prefix
+                parsed[:filename] = parsed[:path].gsub(@stackframe_path_prefix, '')
             end
 
             frames << parsed
