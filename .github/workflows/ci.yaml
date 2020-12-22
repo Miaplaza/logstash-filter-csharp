@@ -16,7 +16,10 @@ jobs:
       uses: docker/setup-buildx-action@v1
     -
       name: Build gem
-      run: gem build logstash-filter-csharp.gemspec && mv logstash-filter-csharp-* logstash-filter-csharp.gem
+      run: gem build logstash-filter-csharp.gemspec
+    -
+      name: Rename gem file
+      run:  mv logstash-filter-csharp-*.gem logstash-filter-csharp.gem
     -
       name: Install in logstash
       uses: docker/build-push-action@v2
