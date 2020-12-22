@@ -15,8 +15,8 @@ jobs:
       name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
     -
-      name: Copy plugin gem to workdir
-      run: cp `bundle info logstash-filter-csharp --path` .
+      name: Build gem
+      run: gem build logstash-filter-csharp.gemspec
     -
       name: Install in logstash
       uses: docker/build-push-action@v2
