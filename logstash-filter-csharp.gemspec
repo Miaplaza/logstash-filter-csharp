@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.licenses = ['Apache-2.0']
   s.summary = 'This filter parses C# stack traces and exception messages.'
   s.description = 'This gem is a logstash plugin required to be installed on top of the Logstash core pipeline using $LS_HOME/bin/logstash-plugin install logstash-filter-csharp. This gem is not a stand-alone program.'
-  s.authors = ['Julian Rüth', 'Solomiia Demkiv']
+  s.authors = ['Julian Rüth', 'Solomiia Demkiv', 'Leonard Kleinhans']
   s.email = 'infrastructure@miaplaza.com'
   s.homepage = 'https://github.com/Miaplaza/logstash-filter-csharp'
   s.require_paths = ['lib']
@@ -17,6 +17,6 @@ Gem::Specification.new do |s|
 
   # Gem dependencies
   s.add_runtime_dependency 'logstash-core-plugin-api', '>= 1.60', '< 3.0'
-  s.add_runtime_dependency 'json', '>=2.3.0', '< 3.0.0'
+  s.add_runtime_dependency 'json', '>=1.8.0', '< 2.0.0'
   s.add_development_dependency 'logstash-devutils', '>= 1.3.6', '< 3.0.0'
 end
