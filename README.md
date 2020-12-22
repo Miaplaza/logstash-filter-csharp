@@ -70,5 +70,5 @@ sure you are on the master branch, identical to origin/master without pending
 changes and run
 
 ```
-rever 0.0.0
+rever <VERSION>
 ```
