@@ -2,4 +2,4 @@
 
 FROM logstash:7.6.0
 
-RUN logstash-plugin install ./logstash-filter-csharp
+RUN logstash-plugin install ./logstash-filter-csharp.gem
