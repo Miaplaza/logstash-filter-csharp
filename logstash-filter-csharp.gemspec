@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'logstash-filter-csharp'
-  s.version = '0.2.1'
+  s.version = '0.2.2'
   s.licenses = ['Apache-2.0']
   s.summary = 'This filter parses C# stack traces and exception messages.'
   s.description = 'This gem is a logstash plugin required to be installed on top of the Logstash core pipeline using $LS_HOME/bin/logstash-plugin install logstash-filter-csharp. This gem is not a stand-alone program.'
